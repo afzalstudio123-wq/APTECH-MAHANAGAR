@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Practice Lab | Aptech@Mahanagar, Lko</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#0693E3',
+            brandBlueDark: '#032656',
+            brandPurple: '#7D077D',
+            lightBg: '#F8FAFC',
+            cardBg: '#FFFFFF',
+            textMain: '#2B161B',
+            textMuted: '#453E3E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="bg-lightBg text-textMain min-h-screen flex flex-col font-sans pb-24">
+
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brandBlue to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brandBlue/20 group-hover:scale-105 transition-transform">
+          A
+        </div>
+        <span class="font-bold text-xl tracking-tight text-brandBlueDark">
+          Aptech<span class="text-brandBlue">@Mahanagar, Lko</span>
+        </span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-textMuted">
+        <a href="../index.html" class="nav-link-btn hover:text-brandBlue transition-colors">Home</a>
+        <a href="../dashboard.html" class="nav-link-btn hover:text-brandBlue transition-colors">Dashboard</a>
+        <a href="../practice.html" class="nav-link-btn text-brandBlue border-b-2 border-brandBlue">Practice Portal</a>
+        <a href="../challenges.html" class="nav-link-btn hover:text-brandBlue transition-colors">Challenges</a>
+        <a href="../interview.html" class="nav-link-btn hover:text-brandBlue transition-colors">Interview Prep</a>
+        <a href="../analytics.html" class="nav-link-btn hover:text-brandBlue transition-colors">Analytics</a>
+        <a href="../resources.html" class="nav-link-btn hover:text-brandBlue transition-colors">Free Resources</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="../dashboard.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold text-white bg-brandBlue hover:bg-brandBlue/90 rounded-full transition-all shadow-md">
+          Dashboard
+        </a>
+        <a href="../profile.html" class="flex items-center gap-2 cursor-pointer">
+          <img src="https://ui-avatars.com/api/?name=Student&background=0693E3&color=ffffff&bold=true" class="w-8 h-8 rounded-full border border-gray-200" alt="Avatar">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="flex-grow pt-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="flex items-center justify-between border-b pb-4">
+      <div>
+        <span class="text-xs text-brandBlue font-bold uppercase tracking-wider block">PRACTICE LABS</span>
+        <h2 class="text-xl sm:text-2xl font-black text-brandBlueDark">🤖 AI & Deep Learning Lab (LLMs, Neural Networks, Transformers)</h2>
+      </div>
+      <a href="../practice.html" class="text-xs text-textMuted hover:text-brandBlue font-bold">← Return to Hub</a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left Sidebar -->
+      <div class="lg:col-span-3 bg-white p-5 rounded-2xl border shadow-sm space-y-4">
+        <span class="text-xs text-gray-400 font-bold uppercase tracking-wider select-none">AI Progress</span>
+        <div class="border-t pt-4">
+          <span class="text-xs text-gray-400 block font-semibold">Active Subject Score</span>
+          <span class="text-2xl font-black text-brandBlue" id="session-score">30.0 LT</span>
+        </div>
+        <div class="border-t pt-4 flex items-center justify-between">
+          <span class="text-xs text-gray-400 font-semibold">Streak</span>
+          <span class="text-sm font-bold text-orange-500" id="session-streak">🔥 1 Day</span>
+        </div>
+      </div>
+
+      <!-- Right MCQ / Fill-up Terminal -->
+      <div class="lg:col-span-9 bg-white rounded-2xl border shadow-sm overflow-hidden flex flex-col justify-between min-h-[425px]">
+        <div class="bg-gray-50 border-b px-6 py-4 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-500 font-bold uppercase tracking-wider" id="current-question-tag">Question #1</span>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 text-xs font-mono font-bold text-brandPurple bg-purple-50 px-3 py-1 rounded-full border border-purple-100 timer-active">
+                ⏱ <span id="question-timer">00:00</span>
+              </div>
+              <span class="text-[10px] text-white bg-brandBlue px-2.5 py-0.5 rounded-full font-bold uppercase" id="current-question-difficulty">Moderate</span>
+            </div>
+          </div>
+          <div class="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+            <div id="question-progress-bar" class="bg-brandBlue h-full transition-all duration-300" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 flex-grow space-y-6">
+          <div class="text-base sm:text-lg text-brandBlueDark font-bold leading-relaxed font-mono whitespace-pre-line" id="question-body">
+            Loading AI Question...
+          </div>
+
+          <!-- Options Container (MCQs or Fill-up) -->
+          <div id="question-options-container" class="space-y-3.5">
+            <!-- Loaded dynamically -->
+          </div>
+
+          <!-- Explanation -->
+          <div id="explanation-container" class="hidden p-4 bg-emerald-50/50 rounded-xl border border-emerald-500/20 text-xs text-textMuted space-y-2 leading-relaxed">
+            <span class="font-bold text-emerald-700 block">💡 Detailed Explanation</span>
+            <p id="explanation-text" class="font-mono"></p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 border-t px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+          <button id="btn-practice-solution" onclick="toggleExplanation()" class="px-5 py-2.5 bg-white border text-textMuted hover:text-brandBlue hover:border-brandBlue/35 text-xs font-bold rounded-lg transition-all" disabled>
+            Show Explanation
+          </button>
+          <div class="flex items-center gap-3">
+            <button id="btn-practice-skip" onclick="skipQuestion()" class="px-5 py-2.5 bg-white border text-textMuted hover:text-brandBlue hover:border-brandBlue/35 text-xs font-bold rounded-lg transition-all">
+              Skip
+            </button>
+            <button id="btn-practice-submit" onclick="submitAnswer()" class="px-6 py-2.5 bg-brandBlue hover:bg-brandBlue/90 text-white text-xs font-bold rounded-lg shadow-sm transition-all">
+              Submit Answer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/practice-engine.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    let aiQuestions = [];
+    let currentIdx = 0;
+    let selectedOpt = null;
+    let secondsElapsed = 0;
+    let timerInt = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      aiQuestions = questionPool.filter(q => q.subject === 'AI');
+      const streak = Storage.get('streak', { count: 1 });
+      document.getElementById('session-streak').innerText = `🔥 ${streak.count} ${streak.count === 1 ? 'Day' : 'Days'}`;
+      updateMasteryUI();
+      loadQuestion();
+    });
+
+    function updateMasteryUI() {
+      const currentScore = getSubjectMastery('AI');
+      document.getElementById('session-score').innerText = `${currentScore.toFixed(1)} LT`;
+    }
+
+    function loadQuestion() {
+      selectedOpt = null;
+      document.getElementById('explanation-container').classList.add('hidden');
+      document.getElementById('btn-practice-solution').disabled = true;
+      document.getElementById('btn-practice-submit').innerText = "Submit Answer";
+      document.getElementById('btn-practice-submit').onclick = submitAnswer;
+
+      const q = aiQuestions[currentIdx];
+      if (!q) return;
+
+      const pct = Math.round((currentIdx / aiQuestions.length) * 100);
+      document.getElementById('question-progress-bar').style.width = `${pct}%`;
+      document.getElementById('current-question-tag').innerText = `Question #${currentIdx + 1} of ${aiQuestions.length}`;
+      document.getElementById('current-question-difficulty').innerText = q.difficulty;
+      document.getElementById('question-body').innerText = q.question;
+
+      const optContainer = document.getElementById('question-options-container');
+      optContainer.innerHTML = '';
+
+      if (q.type === 'fillup') {
+        optContainer.innerHTML = `
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-gray-500 block">Type your answer in the box below:</label>
+            <input type="text" id="fillup-input" placeholder="Type answer here..." class="w-full p-4 font-mono text-xs border rounded-xl bg-gray-50 focus:bg-white focus:ring-1 focus:ring-brandBlue outline-none text-brandBlueDark font-bold">
+          </div>
+        `;
+      } else {
+        q.options.forEach((opt, idx) => {
+          const letter = String.fromCharCode(65 + idx);
+          const div = document.createElement('div');
+          div.className = 'option-btn border p-4 rounded-xl cursor-pointer flex items-center gap-3 bg-white hover:bg-gray-50';
+          div.id = `option-${idx}`;
+          div.onclick = () => selectOption(idx);
+          div.innerHTML = `
+            <div class="option-badge w-6 h-6 rounded-full border flex items-center justify-center font-bold text-xs text-gray-500 bg-white" id="badge-${idx}">${letter}</div>
+            <span class="text-xs font-semibold text-textMain">${opt}</span>
+          `;
+          optContainer.appendChild(div);
+        });
+      }
+
+      resetTimer();
+    }
+
+    function selectOption(idx) {
+      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('option-btn-selected'));
+      selectedOpt = idx;
+      document.getElementById(`option-${idx}`).classList.add('option-btn-selected');
+    }
+
+    function resetTimer() {
+      if (timerInt) clearInterval(timerInt);
+      secondsElapsed = 0;
+      document.getElementById('question-timer').innerText = '00:00';
+      timerInt = setInterval(() => {
+        secondsElapsed++;
+        const m = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+        const s = (secondsElapsed % 60).toString().padStart(2, '0');
+        document.getElementById('question-timer').innerText = `${m}:${s}`;
+      }, 1000);
+    }
+
+    function submitAnswer() {
+      const q = aiQuestions[currentIdx];
+      let isCorrect = false;
+
+      if (q.type === 'fillup') {
+        const inputVal = (document.getElementById('fillup-input').value || '').trim().toLowerCase();
+        if (!inputVal) {
+          alert("Please type your fill-in-the-blank answer!");
+          return;
+        }
+        const answers = Array.isArray(q.fillAnswer) ? q.fillAnswer.map(a => a.toLowerCase()) : [q.fillAnswer.toLowerCase()];
+        isCorrect = answers.includes(inputVal);
+      } else {
+        if (selectedOpt === null) {
+          alert("Please select an answer choice!");
+          return;
+        }
+        isCorrect = (selectedOpt === q.answer);
+      }
+
+      clearInterval(timerInt);
+      playFeedbackSound(isCorrect);
+
+      if (q.type === 'mcq') {
+        const chosen = document.getElementById(`option-${selectedOpt}`);
+        if (isCorrect) {
+          chosen.classList.remove('option-btn-selected');
+          chosen.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-700', 'border-2');
+        } else {
+          chosen.classList.remove('option-btn-selected');
+          chosen.classList.add('bg-red-50', 'border-red-500', 'text-red-700', 'border-2');
+          const correct = document.getElementById(`option-${q.answer}`);
+          if (correct) correct.classList.add('bg-emerald-50/50', 'border-emerald-400/50', 'text-emerald-700');
+        }
+      }
+
+      const attempts = Storage.get('attempts', []);
+      attempts.push({ id: q.id, correct: isCorrect, subject: q.subject, topic: q.topic, time: secondsElapsed });
+      Storage.set('attempts', attempts);
+
+      recalculateAdaptiveMastery('AI', isCorrect);
+      updateMasteryUI();
+
+      document.getElementById('explanation-text').innerText = q.explanation;
+      document.getElementById('btn-practice-solution').disabled = false;
+      document.getElementById('explanation-container').classList.remove('hidden');
+
+      const submit = document.getElementById('btn-practice-submit');
+      submit.innerText = "Next Question →";
+      submit.onclick = loadNext;
+    }
+
+    function loadNext() {
+      currentIdx++;
+      if (currentIdx >= aiQuestions.length) {
+        clearInterval(timerInt);
+        if (window.confetti) confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+        alert("AI Lab Completed! Redirecting to analytics dashboard.");
+        window.location.href = '../analytics.html';
+        return;
+      }
+      loadQuestion();
+    }
+
+    function skipQuestion() { loadNext(); }
+    function toggleExplanation() { document.getElementById('explanation-container').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>

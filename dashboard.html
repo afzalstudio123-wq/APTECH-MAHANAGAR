@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard & Scoreboard | Aptech@Mahanagar, Lko</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#0693E3',
+            brandBlueDark: '#032656',
+            brandPurple: '#7D077D',
+            lightBg: '#F8FAFC',
+            cardBg: '#FFFFFF',
+            textMain: '#2B161B',
+            textMuted: '#453E3E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="bg-lightBg text-textMain min-h-screen flex flex-col font-sans pb-24">
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brandBlue to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brandBlue/20 group-hover:scale-105 transition-transform">
+          A
+        </div>
+        <span class="font-bold text-xl tracking-tight text-brandBlueDark">
+          Aptech<span class="text-brandBlue">@Mahanagar, Lko</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav Link Menu -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-textMuted">
+        <a href="index.html" class="nav-link-btn" id="nav-btn-landing">Home</a>
+        <a href="dashboard.html" class="nav-link-btn" id="nav-btn-dashboard">Dashboard</a>
+        <a href="practice.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-practice">Practice Portal</a>
+        <a href="challenges.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-challenges">Challenges</a>
+        <a href="interview.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-interview">Test Paper & Prep</a>
+        <a href="analytics.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-analytics">Analytics</a>
+        <a href="resources.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-resources">Free Resources</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4">
+        <a href="login.html" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-brandBlue bg-blue-50 border border-brandBlue/30 hover:bg-brandBlue hover:text-white rounded-full transition-all">
+          <span class="header-user-name">Student Login</span>
+        </a>
+        <a href="profile.html" class="flex items-center gap-2 cursor-pointer">
+          <img src="https://ui-avatars.com/api/?name=Student&background=0693E3&color=ffffff&bold=true" class="w-8 h-8 rounded-full border border-gray-200" alt="Avatar">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow pt-24 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 space-y-8">
+    
+    <!-- Welcome Header & KPI Counters -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div>
+        <div class="inline-block px-3 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-xs font-bold mb-1">
+          Aptech Computer Education &middot; Mahanagar, Lucknow
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-brandBlueDark flex items-center gap-2">
+          <span>Welcome, <span id="dash-username">Candidate</span></span> 👋
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1" id="dash-user-meta">Class: Batch A1 &middot; Primary Track: Data Science</p>
+      </div>
+      
+      <!-- Stats Overview Row -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <div class="bg-white px-4 py-2.5 rounded-xl border shadow-sm text-center">
+          <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider block">XP</span>
+          <span class="text-lg font-black text-brandBlue" id="dash-xp">0</span>
+        </div>
+        <div class="bg-white px-4 py-2.5 rounded-xl border shadow-sm text-center">
+          <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider block">Level</span>
+          <span class="text-lg font-black text-brandPurple" id="dash-level">1</span>
+        </div>
+        <div class="bg-white px-4 py-2.5 rounded-xl border shadow-sm text-center">
+          <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-wider block">Daily Streak</span>
+          <span class="text-lg font-black text-orange-500" id="dash-streak">🔥 1</span>
+        </div>
+        <a href="login.html" class="px-3.5 py-2.5 bg-gray-100 hover:bg-brandBlue hover:text-white text-xs font-bold rounded-xl transition-all text-gray-600">
+          Edit Profile
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Workspace Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column (Col 8) -->
+      <div class="lg:col-span-8 space-y-8 animate-fade-in">
+        
+        <!-- Continue Practice Section -->
+        <div class="bg-white p-6 rounded-3xl border shadow-sm space-y-4">
+          <h3 class="font-bold text-sm text-brandBlueDark uppercase tracking-wider border-b pb-2 flex items-center justify-between">
+            <span>Continue Test & Practice</span>
+            <span class="text-xs text-brandBlue font-bold uppercase tracking-wider" id="dash-continue-subject">Data Science</span>
+          </h3>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <h4 class="font-black text-base text-brandBlueDark" id="dash-continue-topic">Machine Learning & Scikit-Learn</h4>
+              <p class="text-xs text-gray-500">Pick up where you left off. Practice test papers or topic questions.</p>
+            </div>
+            <a href="interview.html" class="px-5 py-2.5 bg-brandBlue hover:bg-brandBlue/90 text-white text-xs font-bold rounded-xl shadow-md transition-all text-center">
+              Start 25-Q Test Paper →
+            </a>
+          </div>
+        </div>
+
+        <!-- LIVE SCOREBOARD / LEADERBOARD (NAME-WISE & COURSE-WISE) -->
+        <div class="bg-white p-6 rounded-3xl border shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3">
+            <div>
+              <span class="text-[10px] text-brandPurple font-extrabold uppercase tracking-wider block">Aptech@Mahanagar Score Chart</span>
+              <h3 class="font-black text-lg text-brandBlueDark">🏆 Student Scoreboard</h3>
+            </div>
+            <!-- Course Filter -->
+            <select id="scoreboard-course-filter" onchange="renderScoreboard()" class="px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-bold text-brandBlueDark bg-gray-50 focus:ring-1 focus:ring-brandBlue outline-none">
+              <option value="All">All Courses Scoreboard</option>
+              <option value="Data Science">Data Science</option>
+              <option value="AI">AI (Artificial Intelligence)</option>
+              <option value="SQL">SQL Database</option>
+              <option value="Python">Python Analytics</option>
+              <option value="Excel">Excel Analytics</option>
+              <option value="Statistics">Statistics & Prob</option>
+              <option value="Power BI">Power BI & DAX</option>
+            </select>
+          </div>
+
+          <div class="overflow-x-auto w-full">
+            <table class="min-w-full divide-y divide-gray-200 text-left border-collapse text-xs">
+              <thead class="bg-gray-50 font-bold text-gray-400 uppercase text-[10px] tracking-wider">
+                <tr>
+                  <th class="px-4 py-2.5">Rank</th>
+                  <th class="px-4 py-2.5">Student Name</th>
+                  <th class="px-4 py-2.5">Class / Batch</th>
+                  <th class="px-4 py-2.5">Course Track</th>
+                  <th class="px-4 py-2.5">Score / XP</th>
+                  <th class="px-4 py-2.5">Readiness Level</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-150 font-medium text-brandBlueDark" id="scoreboard-body">
+                <!-- Dynamically Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recommended For You (Adaptive recommendations) -->
+        <div class="space-y-4">
+          <h3 class="font-black text-lg text-brandBlueDark">Recommended For You</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" id="dash-recommendations-grid">
+            <!-- Loaded dynamically based on storage performance -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column (Col 4) -->
+      <div class="lg:col-span-4 space-y-8">
+        
+        <!-- Skill Mastery Progress Widget (7 Courses) -->
+        <div class="bg-white p-6 rounded-3xl border shadow-sm space-y-4">
+          <h3 class="font-bold text-sm text-brandBlueDark uppercase tracking-wider border-b pb-2">Course Skill Mastery</h3>
+          <div class="space-y-3.5">
+            <!-- Data Science -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">🔬 Data Science (ML & EDA)</span>
+                <span class="text-brandBlue" id="mastery-val-datascience">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-datascience"></div>
+              </div>
+            </div>
+            <!-- AI -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">🤖 AI & Deep Learning</span>
+                <span class="text-brandPurple" id="mastery-val-ai">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandPurple h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-ai"></div>
+              </div>
+            </div>
+            <!-- SQL -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">💾 SQL Queries</span>
+                <span class="text-brandBlue" id="mastery-val-sql">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-sql"></div>
+              </div>
+            </div>
+            <!-- Python -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">🐍 Python Wrangling</span>
+                <span class="text-brandBlue" id="mastery-val-python">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-python"></div>
+              </div>
+            </div>
+            <!-- Excel -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">📊 Excel Formulas</span>
+                <span class="text-brandBlue" id="mastery-val-excel">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-excel"></div>
+              </div>
+            </div>
+            <!-- Statistics -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">🧠 Statistics & Prob</span>
+                <span class="text-brandBlue" id="mastery-val-statistics">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-statistics"></div>
+              </div>
+            </div>
+            <!-- Power BI -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold">
+                <span class="text-gray-700">💻 Power BI DAX</span>
+                <span class="text-brandBlue" id="mastery-val-powerbi">30%</span>
+              </div>
+              <div class="w-full bg-gray-150 h-2 rounded-full overflow-hidden">
+                <div class="bg-brandBlue h-full transition-all duration-500" style="width: 30%;" id="mastery-bar-powerbi"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Daily Challenge card -->
+        <div class="bg-gradient-to-br from-brandPurple to-blue-900 text-white p-6 rounded-3xl shadow-lg relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="space-y-2 relative z-10">
+            <span class="px-2 py-0.5 rounded bg-purple-500/25 border border-purple-400/20 text-[9px] font-bold uppercase tracking-wider">Aptech Data Challenge</span>
+            <h4 class="font-black text-lg">Data Science & AI Test Paper</h4>
+            <p class="text-xs text-blue-200 leading-relaxed">25 Questions set balancing Easy, Moderate & Hard levels.</p>
+          </div>
+          <div class="pt-4 border-t border-purple-500/20 relative z-10 flex items-center justify-between">
+            <span class="text-[10px] text-purple-300 font-bold">+50 XP &middot; Aptech Certificate</span>
+            <a href="interview.html" class="px-4 py-2 bg-brandBlue hover:bg-brandBlue/90 text-xs font-bold text-white rounded-xl transition-all shadow-md">
+              Start Test Paper
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = Storage.get('user') || {};
+      const mastery = Storage.get('mastery') || {};
+      const streak = Storage.get('streak', { count: 1 });
+
+      document.getElementById('dash-username').innerText = user.name || 'Student';
+      document.getElementById('dash-user-meta').innerText = `Class: ${user.class || 'Regular'} · Course Track: ${user.subject || 'Data Analytics & AI'}`;
+      document.getElementById('dash-xp').innerText = user.xp || 0;
+      document.getElementById('dash-level').innerText = user.level || 1;
+      document.getElementById('dash-streak').innerText = `🔥 ${streak.count}`;
+      document.getElementById('dash-continue-subject').innerText = user.subject || 'Data Science';
+
+      const subjects = ['datascience', 'ai', 'sql', 'excel', 'python', 'statistics', 'powerbi'];
+      subjects.forEach(sub => {
+        const score = mastery[sub] !== undefined ? mastery[sub] : 30.0;
+        const valEl = document.getElementById(`mastery-val-${sub}`);
+        const barEl = document.getElementById(`mastery-bar-${sub}`);
+        if (valEl) valEl.innerText = `${score.toFixed(1)}%`;
+        if (barEl) barEl.style.width = `${score}%`;
+      });
+
+      renderScoreboard();
+      renderAdaptiveRecommendations(mastery);
+    });
+
+    function renderScoreboard() {
+      const filterCourse = document.getElementById('scoreboard-course-filter').value;
+      const tbody = document.getElementById('scoreboard-body');
+      if (!tbody) return;
+
+      const user = Storage.get('user') || {};
+      const studentName = user.name || 'Candidate';
+      const studentClass = user.class || 'Batch A1';
+      const studentSubject = user.subject || 'Data Science';
+      const studentXp = user.xp || 0;
+
+      // Mock student leaderboard data featuring the fixed student name from login!
+      let sampleLeaderboard = [
+        { name: studentName, class: studentClass, subject: studentSubject, xp: studentXp + 450, level: 'Placement Ready' },
+        { name: "Amit Sharma", class: "Batch A1", subject: "Data Science", xp: 380, level: "Advanced" },
+        { name: "Priya Patel", class: "Batch B2", subject: "AI", xp: 320, level: "Advanced" },
+        { name: "Siddharth Verma", class: "Batch A1", subject: "SQL", xp: 290, level: "Intermediate" },
+        { name: "Ananya Gupta", class: "Batch C1", subject: "Python", xp: 260, level: "Intermediate" },
+        { name: "Vikram Singh", class: "Batch B2", subject: "Power BI", xp: 210, level: "Squire" }
+      ];
+
+      // If user has low XP, adjust candidate ranking
+      sampleLeaderboard[0].xp = Math.max(studentXp, 150);
+
+      // Filter course if selected
+      if (filterCourse !== 'All') {
+        sampleLeaderboard = sampleLeaderboard.filter(s => s.subject.toLowerCase() === filterCourse.toLowerCase());
+        if (sampleLeaderboard.length === 0) {
+          sampleLeaderboard.push({ name: studentName, class: studentClass, subject: filterCourse, xp: studentXp, level: 'Candidate' });
+        }
+      }
+
+      // Sort descending by XP
+      sampleLeaderboard.sort((a, b) => b.xp - a.xp);
+
+      tbody.innerHTML = '';
+      sampleLeaderboard.forEach((s, idx) => {
+        const isSelf = (s.name.toLowerCase() === studentName.toLowerCase());
+        const tr = document.createElement('tr');
+        tr.className = isSelf ? 'bg-blue-50/70 font-bold border-l-4 border-l-brandBlue' : 'hover:bg-gray-50';
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-bold text-gray-500">#${idx + 1}</td>
+          <td class="px-4 py-3 font-extrabold text-brandBlueDark">
+            ${s.name} ${isSelf ? '<span class="text-[9px] bg-brandBlue text-white px-1.5 py-0.5 rounded ml-1 font-mono">You</span>' : ''}
+          </td>
+          <td class="px-4 py-3 text-gray-500 font-mono">${s.class}</td>
+          <td class="px-4 py-3 font-bold text-brandPurple">${s.subject}</td>
+          <td class="px-4 py-3 font-mono text-emerald-600 font-bold">${s.xp} XP</td>
+          <td class="px-4 py-3">
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold ${idx===0?'bg-amber-100 text-amber-800': 'bg-blue-50 text-brandBlue'}">
+              ${s.level}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderAdaptiveRecommendations(mastery) {
+      const container = document.getElementById('dash-recommendations-grid');
+      if (!container) return;
+
+      container.innerHTML = '';
+      const list = Object.keys(mastery).map(key => ({ key: key, score: mastery[key] || 30 })).sort((a, b) => a.score - b.score);
+      const weakSubjects = list.slice(0, 2);
+      
+      const details = {
+        datascience: { title: "Data Science & Scikit-Learn Lab", tag: "Data Science Track", desc: "Master model accuracy, confusion matrix, and feature scaling.", page: "practice/datascience.html" },
+        ai: { title: "AI & Neural Networks Lab", tag: "AI Track", desc: "Practice activation functions, LLMs, and prompt engineering.", page: "practice/ai.html" },
+        sql: { title: "SQL JOINs & CTEs", tag: "Database Track", desc: "Practice multi-table queries and group aggregate boundaries.", page: "practice/sql.html" },
+        excel: { title: "Excel XLOOKUP Worksheets", tag: "Excel Track", desc: "Master exact and approximate lookup indexes for placements.", page: "practice/excel.html" },
+        python: { title: "Pandas GroupBy Imputations", tag: "Python Track", desc: "Use group transform to broadcast aggregates correctly.", page: "practice/python.html" },
+        statistics: { title: "Bayes Conditional Testing", tag: "Stats Track", desc: "Recalculate priors logic to solve analytical questions.", page: "practice/statistics.html" },
+        powerbi: { title: "DAX Measures & Schema", tag: "Power BI Track", desc: "Connect tables correctly to prevent circular filter directions.", page: "practice/powerbi.html" }
+      };
+
+      weakSubjects.forEach(item => {
+        const detail = details[item.key];
+        if (!detail) return;
+        const card = document.createElement('div');
+        card.className = "bg-white p-5 rounded-2xl border shadow-sm flex flex-col justify-between hover:border-brandBlue/35 transition-all";
+        card.innerHTML = `
+          <div class="space-y-2">
+            <span class="px-2 py-0.5 rounded bg-blue-50 text-brandBlue text-[9px] font-bold uppercase tracking-wider block w-fit">${detail.tag}</span>
+            <h4 class="font-bold text-sm text-brandBlueDark">${detail.title}</h4>
+            <p class="text-[11px] text-gray-500 leading-relaxed">${detail.desc}</p>
+          </div>
+          <a href="${detail.page}" class="mt-4 text-xs text-brandBlue font-bold block text-right hover:underline">Launch Lab →</a>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

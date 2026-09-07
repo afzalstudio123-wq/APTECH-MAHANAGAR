@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptech@Mahanagar, Lko | Data Analytics & AI Practice Platform</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#0693E3',
+            brandBlueDark: '#032656',
+            brandPurple: '#7D077D',
+            lightBg: '#F8FAFC',
+            cardBg: '#FFFFFF',
+            textMain: '#2B161B',
+            textMuted: '#453E3E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-lightBg text-textMain min-h-screen flex flex-col font-sans pb-24">
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brandBlue to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brandBlue/20 group-hover:scale-105 transition-transform">
+          A
+        </div>
+        <span class="font-bold text-xl tracking-tight text-brandBlueDark">
+          Aptech<span class="text-brandBlue">@Mahanagar, Lko</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav Link Menu -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-textMuted">
+        <a href="index.html" class="nav-link-btn" id="nav-btn-landing">Home</a>
+        <a href="dashboard.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-dashboard">Dashboard</a>
+        <a href="practice.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-practice">Practice Portal</a>
+        <a href="challenges.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-challenges">Challenges</a>
+        <a href="interview.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-interview">Test Paper & Prep</a>
+        <a href="analytics.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-analytics">Analytics</a>
+        <a href="resources.html" class="nav-link-btn hover:text-brandBlue transition-colors" id="nav-btn-resources">Free Resources</a>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-4">
+        <a href="login.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold text-white bg-brandBlue hover:bg-brandBlue/90 rounded-full transition-all shadow-md shadow-brandBlue/10 hover:shadow-lg">
+          Student Registration & Login
+        </a>
+        <a href="profile.html" class="flex items-center gap-2 cursor-pointer">
+          <img src="https://ui-avatars.com/api/?name=Student&background=0693E3&color=ffffff&bold=true" class="w-8 h-8 rounded-full border border-gray-200" alt="Avatar">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-grow pt-16">
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-white to-white py-20 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
+        <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-xs font-bold uppercase tracking-wider select-none">
+          ⚡ Aptech Computer Education &middot; Mahanagar, Lucknow
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight max-w-4xl mx-auto leading-none text-gradient-blue pb-1">
+          Master Data Science, AI & Analytics.
+        </h1>
+        <p class="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          Practice 25-Question Test Papers, SQL Compilers, Machine Learning models, Scikit-Learn, AI Neural Networks, and Kaggle datasets.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+          <a href="login.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-sm text-white bg-brandBlue hover:bg-brandBlue/90 shadow-lg shadow-brandBlue/20 hover:scale-105 transform transition-all duration-300">
+            Student Registration & Login
+          </a>
+          <a href="interview.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-sm text-textMuted bg-gray-150 hover:bg-gray-200 transition-all">
+            Take 25-Q Test Paper
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL CATEGORIES MATRIX SECTION (7 COURSES) -->
+    <section class="py-16 bg-white border-y border-gray-150">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs text-brandBlue font-extrabold uppercase tracking-widest">APTECH COURSE TRACKS</span>
+          <h2 class="text-3xl font-black text-brandBlueDark">Curriculum & Practice Labs</h2>
+          <p class="text-gray-500 text-sm">Select any course area to launch interactive test papers and practice workbenches.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Data Science Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">🔬</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">Data Science & ML</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Master Random Forests, Scikit-Learn, F1-Score metrics, Exploratory Data Analysis, and feature scaling.
+              </p>
+            </div>
+            <a href="practice/datascience.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Launch Data Science Lab</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          <!-- AI Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">🤖</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">AI & Neural Networks</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Explore activation functions, CNNs, Transformers, LLMs, Deep Learning, and Prompt Engineering.
+              </p>
+            </div>
+            <a href="practice/ai.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Launch AI Lab</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          <!-- SQL Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">💾</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">SQL Queries Lab</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Query relational databases and solve business tasks using our extended SELECT, WHERE, and GROUP BY sandbox.
+              </p>
+            </div>
+            <a href="practice/sql.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Launch SQL Compiler</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          <!-- Python Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">🐍</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">Python Analytics</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Practice Pandas GroupBy, data cleanse drops, matrix lists, and basic numpy arrays configurations.
+              </p>
+            </div>
+            <a href="practice/python.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Solve Pandas Snippets</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          <!-- Excel Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">📊</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">Excel Worksheets</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Master lookups (XLOOKUP, INDEX/MATCH), logical evaluation arrays, and formatting/data cleaning strings.
+              </p>
+            </div>
+            <a href="practice/excel.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Try Formula Challenges</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          <!-- Statistics Card -->
+          <div class="bg-lightBg p-6 rounded-2xl border border-gray-200 flex flex-col justify-between spring-hover">
+            <div class="space-y-3">
+              <span class="text-2xl">🧠</span>
+              <h3 class="font-bold text-lg text-brandBlueDark">Statistics & Probability</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Build logical analytical reasoning over variance distributions, p-values validation, and Bayes probabilities.
+              </p>
+            </div>
+            <a href="practice/statistics.html" class="mt-6 border-t pt-4 flex items-center justify-between text-xs text-brandBlue font-semibold hover:underline">
+              <span>Practice Stats Analytics</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-brandBlueDark text-gray-400 py-8 border-t border-blue-950 mt-12 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center gap-2 text-white">
+        <div class="w-7 h-7 rounded bg-brandBlue flex items-center justify-center font-bold text-sm">A</div>
+        <span class="font-bold">Aptech@Mahanagar, Lko</span>
+      </div>
+      <p class="text-xs leading-relaxed max-w-md mx-auto">
+        Aptech Computer Education &middot; Mahanagar Centre, Lucknow. Data Science, AI & Analytics Practice Platform.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
