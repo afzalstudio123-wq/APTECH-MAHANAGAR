@@ -623,15 +623,15 @@ const questionPool = [
   },
 
   // =========================================================================
-  // ==================== 3. EXCEL (25 DISTINCT QUESTIONS) ===================
+  // ==================== 3. EXCEL (50 DISTINCT QUESTIONS - 25 MCQs & 25 Fillups) ===================
   // =========================================================================
   {
     id: "excel_01",
     subject: "Excel",
-    topic: "XLOOKUP",
+    topic: "XLOOKUP Match Mode",
     difficulty: "Moderate",
     type: "mcq",
-    question: "What is the default match mode of XLOOKUP if match_mode is omitted?",
+    question: "What is the default match mode of XLOOKUP if match_mode parameter is omitted?",
     options: ["A. Exact match (0)", "B. Next smaller (-1)", "C. Wildcard (2)", "D. Approximate (1)"],
     answer: 0,
     explanation: "XLOOKUP defaults to exact match (0).",
@@ -915,6 +915,315 @@ const questionPool = [
     fillAnswer: ["RANK", "RANK.EQ", "RANK()"],
     explanation: "RANK returns the rank of a number in a list of numbers.",
     xp: 15
+  },
+  {
+    id: "excel_26",
+    subject: "Excel",
+    topic: "IFS Student Grades",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Using the IFS function for cell B2 (Marks), which formula correctly assigns grades: >=90 'A', >=75 'B', >=60 'C', >=40 'D', otherwise 'F'?",
+    options: [
+      "A. =IFS(B2>=90, \"A\", B2>=75, \"B\", B2>=60, \"C\", B2>=40, \"D\", TRUE, \"F\")",
+      "B. =IF(B2>=90, \"A\", \"B\", \"C\")",
+      "C. =IFS(B2, 90='A', 75='B')",
+      "D. =GRADE(B2)"
+    ],
+    answer: 0,
+    explanation: "IFS evaluates multiple conditions sequentially. Using TRUE as the last condition creates a default fallback value.",
+    xp: 15
+  },
+  {
+    id: "excel_27",
+    subject: "Excel",
+    topic: "IFS Employee Performance",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Using the IFS function for cell B2 (Score), how do you classify: >=90 = 'Excellent', >=75 = 'Good', >=60 = 'Average', >=40 = 'Needs Improvement', otherwise 'Poor'?",
+    options: [
+      "A. =IFS(B2>=90, \"Excellent\", B2>=75, \"Good\", B2>=60, \"Average\", B2>=40, \"Needs Improvement\", TRUE, \"Poor\")",
+      "B. =IFS(B2, 90, \"Excellent\", 75, \"Good\")",
+      "C. =SWITCH(B2, 90, \"Excellent\")",
+      "D. =IF(B2>90, \"Excellent\")"
+    ],
+    answer: 0,
+    explanation: "IFS checks each logical test in order: IFS(logical1, value1, logical2, value2, ... TRUE, default).",
+    xp: 15
+  },
+  {
+    id: "excel_28",
+    subject: "Excel",
+    topic: "SUMIF Single Condition",
+    difficulty: "Easy",
+    type: "mcq",
+    question: "For a single condition, what is the standard SUMIF formula syntax to sum Revenues in range C1:C100 where Category in B1:B100 matches 'Electronics'?",
+    options: [
+      "A. =SUMIF(B1:B100, \"Electronics\", C1:C100)",
+      "B. =SUMIF(C1:C100, B1:B100, \"Electronics\")",
+      "C. =SUM(B1:B100, \"Electronics\")",
+      "D. =TOTAL(B1:B100)"
+    ],
+    answer: 0,
+    explanation: "Single condition SUMIF syntax is =SUMIF(range, criteria, [sum_range]).",
+    xp: 10
+  },
+  {
+    id: "excel_29",
+    subject: "Excel",
+    topic: "TextJoin Delimiter",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Which function joins a range of text cells separated by a specific delimiter while optionally ignoring empty cells?",
+    options: ["A. TEXTJOIN", "B. CONCATENATE", "C. MERGE", "D. JOIN"],
+    answer: 0,
+    explanation: "TEXTJOIN(delimiter, ignore_empty, text1, ...) combines strings with a delimiter.",
+    xp: 15
+  },
+  {
+    id: "excel_30",
+    subject: "Excel",
+    topic: "Date Difference",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Which hidden Excel function calculates the exact number of full years ('Y'), months ('M'), or days ('D') between two dates?",
+    options: ["A. DATEDIF", "B. DATEBEFORE", "C. DAYSBETWEEN", "D. AGECALC"],
+    answer: 0,
+    explanation: "DATEDIF(start_date, end_date, unit) calculates the difference between dates.",
+    xp: 15
+  },
+  {
+    id: "excel_31",
+    subject: "Excel",
+    topic: "Financial PMT",
+    difficulty: "Hard",
+    type: "mcq",
+    question: "Which financial function calculates the monthly loan payment based on a constant interest rate and fixed payment schedule?",
+    options: ["A. PMT", "B. NPER", "C. PV", "D. IRR"],
+    answer: 0,
+    explanation: "PMT(rate, nper, pv) calculates loan payments.",
+    xp: 25
+  },
+  {
+    id: "excel_32",
+    subject: "Excel",
+    topic: "End of Month Date",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "What does formula =EOMONTH(DATE(2026, 9, 1), 0) return in Excel?",
+    options: ["A. 2026-09-30", "B. 2026-09-01", "C. 2026-10-31", "D. 2026-08-31"],
+    answer: 0,
+    explanation: "EOMONTH returns the last day of the month specified.",
+    xp: 15
+  },
+  {
+    id: "excel_33",
+    subject: "Excel",
+    topic: "Indirect Reference",
+    difficulty: "Hard",
+    type: "mcq",
+    question: "Which Excel function converts a text string into a valid cell reference dynamically?",
+    options: ["A. INDIRECT", "B. DIRECT", "C. CELLREF", "D. ADDRESS"],
+    answer: 0,
+    explanation: "INDIRECT returns the reference specified by a text string.",
+    xp: 25
+  },
+  {
+    id: "excel_34",
+    subject: "Excel",
+    topic: "Dynamic Offset",
+    difficulty: "Hard",
+    type: "mcq",
+    question: "Which function returns a cell or range of cells that is a specified number of rows and columns from a starting cell?",
+    options: ["A. OFFSET", "B. SHIFT", "C. MOVE", "D. LOCATE"],
+    answer: 0,
+    explanation: "OFFSET(reference, rows, cols, [height], [width]) shifts a reference dynamically.",
+    xp: 25
+  },
+  {
+    id: "excel_35",
+    subject: "Excel",
+    topic: "Choose Function",
+    difficulty: "Easy",
+    type: "mcq",
+    question: "What is the output of =CHOOSE(2, \"Apple\", \"Banana\", \"Cherry\") in Excel?",
+    options: ["A. Banana", "B. Apple", "C. Cherry", "D. Error"],
+    answer: 0,
+    explanation: "CHOOSE returns the 2nd item from the list: 'Banana'.",
+    xp: 10
+  },
+  {
+    id: "excel_36",
+    subject: "Excel",
+    topic: "Countifs Multiple Conditions",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Which formula counts rows where Department is 'IT' AND Salary > 50000 in Excel?",
+    options: [
+      "A. =COUNTIFS(A1:A100, \"IT\", B1:B100, \">50000\")",
+      "B. =COUNTIF(A1:A100, \"IT\", \">50000\")",
+      "C. =SUMIF(A1:A100, \"IT\")",
+      "D. =COUNT(A1:A100)"
+    ],
+    answer: 0,
+    explanation: "COUNTIFS applies criteria to cells across multiple ranges.",
+    xp: 15
+  },
+  {
+    id: "excel_37",
+    subject: "Excel",
+    topic: "Future Workday Date",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Which function calculates a future date that is N working days away from a start date, skipping weekends?",
+    options: ["A. WORKDAY", "B. NEXTDAY", "C. ADDDAYS", "D. FUTUREDATE"],
+    answer: 0,
+    explanation: "WORKDAY(start_date, days, [holidays]) returns a date N working days in future.",
+    xp: 15
+  },
+  {
+    id: "excel_38",
+    subject: "Excel",
+    topic: "Switch Function",
+    difficulty: "Moderate",
+    type: "mcq",
+    question: "Which logical function evaluates an expression against a list of values and returns the result corresponding to the first matching value?",
+    options: ["A. SWITCH", "B. SELECT", "C. CASE", "D. MATCHCASE"],
+    answer: 0,
+    explanation: "SWITCH evaluates an expression against a sequence of values.",
+    xp: 15
+  },
+  {
+    id: "excel_39",
+    subject: "Excel",
+    topic: "Sortby Dynamic Array",
+    difficulty: "Hard",
+    type: "mcq",
+    question: "Which modern Excel function sorts the contents of a range or array based on the values in a corresponding range?",
+    options: ["A. SORTBY", "B. ORDERBY", "C. ARRAYSORT", "D. RANKBY"],
+    answer: 0,
+    explanation: "SORTBY sorts a range based on another array's values.",
+    xp: 25
+  },
+  {
+    id: "excel_40",
+    subject: "Excel",
+    topic: "Single Condition SUMIF",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To sum values based on a single condition with syntax (range, criteria, sum_range), use the __________ function.",
+    fillAnswer: ["SUMIF", "SUMIF()"],
+    explanation: "SUMIF(range, criteria, sum_range) sums matching cells.",
+    xp: 10
+  },
+  {
+    id: "excel_41",
+    subject: "Excel",
+    topic: "IFS Multi Condition",
+    difficulty: "Moderate",
+    type: "fillup",
+    question: "Fill in the blank: The logical function that evaluates multiple condition-result pairs in a single clean expression is __________().",
+    fillAnswer: ["IFS", "IFS()"],
+    explanation: "IFS tests whether one or more conditions are met and returns a value.",
+    xp: 15
+  },
+  {
+    id: "excel_42",
+    subject: "Excel",
+    topic: "Proper Case Text",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To capitalize the first letter of every word in a text cell in Excel, use =__________(A1).",
+    fillAnswer: ["PROPER", "PROPER()"],
+    explanation: "PROPER capitalizes the first letter of each word.",
+    xp: 10
+  },
+  {
+    id: "excel_43",
+    subject: "Excel",
+    topic: "Count Non-Empty",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To count all non-empty cells in a range regardless of whether they contain numbers or text, use __________().",
+    fillAnswer: ["COUNTA", "COUNTA()"],
+    explanation: "COUNTA counts non-blank cells in a range.",
+    xp: 10
+  },
+  {
+    id: "excel_44",
+    subject: "Excel",
+    topic: "Count Blank Cells",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To count empty/blank cells within a range in Excel, use the __________ function.",
+    fillAnswer: ["COUNTBLANK", "COUNTBLANK()"],
+    explanation: "COUNTBLANK counts empty cells in a specified range.",
+    xp: 10
+  },
+  {
+    id: "excel_45",
+    subject: "Excel",
+    topic: "Concat Function",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: The modern replacement for CONCATENATE that joins text from multiple ranges is =__________().",
+    fillAnswer: ["CONCAT", "CONCAT()"],
+    explanation: "CONCAT combines text from multiple ranges.",
+    xp: 10
+  },
+  {
+    id: "excel_46",
+    subject: "Excel",
+    topic: "Middle Text Extraction",
+    difficulty: "Moderate",
+    type: "fillup",
+    question: "Fill in the blank: To extract text starting from a specific position in the middle of a string, use =__________(text, start_num, num_chars).",
+    fillAnswer: ["MID", "MID()"],
+    explanation: "MID extracts characters from the middle of a string.",
+    xp: 15
+  },
+  {
+    id: "excel_47",
+    subject: "Excel",
+    topic: "Search Substring Position",
+    difficulty: "Moderate",
+    type: "fillup",
+    question: "Fill in the blank: To find the starting character position of a substring within a text string (case-insensitive), use =__________(find_text, within_text).",
+    fillAnswer: ["SEARCH", "SEARCH()"],
+    explanation: "SEARCH locates the starting position of text within text.",
+    xp: 15
+  },
+  {
+    id: "excel_48",
+    subject: "Excel",
+    topic: "IFNA Lookup Trap",
+    difficulty: "Moderate",
+    type: "fillup",
+    question: "Fill in the blank: To specifically trap and handle #N/A lookup errors in Excel, wrap your lookup formula in =__________().",
+    fillAnswer: ["IFNA", "IFNA()"],
+    explanation: "IFNA specifically catches #N/A errors from lookup functions.",
+    xp: 15
+  },
+  {
+    id: "excel_49",
+    subject: "Excel",
+    topic: "Mod Remainder Function",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To return the remainder after a number is divided by a divisor in Excel, use =__________(number, divisor).",
+    fillAnswer: ["MOD", "MOD()"],
+    explanation: "MOD returns the remainder after division.",
+    xp: 10
+  },
+  {
+    id: "excel_50",
+    subject: "Excel",
+    topic: "Random Integer Generator",
+    difficulty: "Easy",
+    type: "fillup",
+    question: "Fill in the blank: To generate a random integer between two specified numbers in Excel, use =__________(bottom, top).",
+    fillAnswer: ["RANDBETWEEN", "RANDBETWEEN()"],
+    explanation: "RANDBETWEEN returns a random number between specified bounds.",
+    xp: 10
   },
 
   // =========================================================================
